@@ -1,15 +1,49 @@
-"""The original BookRec design, hosted as its own independent Streamlit app."""
+"""BookRec: upload app.py, requirements.txt and bookrec_bundle.zip together."""
 from pathlib import Path
+import hashlib
 import json
+import os
 import secrets
-
+import sys
+import tempfile
+import zipfile
 import streamlit as st
 import streamlit.components.v1 as components
+
+UPLOAD_DIR = Path(__file__).resolve().parent
+st.set_page_config(page_title="BookRec — Қазақ әдебиеті", page_icon="📚", layout="wide", initial_sidebar_state="collapsed")
+
+@st.cache_resource
+def unpack_project():
+    bundle = UPLOAD_DIR / "bookrec_bundle.zip"
+    if not bundle.is_file():
+        raise FileNotFoundError("bookrec_bundle.zip файлын app.py жанына жүктеңіз. Ішкі архивті ашудың қажеті жоқ.")
+    fingerprint = hashlib.sha256(bundle.read_bytes()).hexdigest()
+    if fingerprint != "dad90ff50ca0ecb9376aabcf7bc0b3d0f83dbf8f115b902f800decd5d797f605":
+        raise ValueError("bookrec_bundle.zip толық жүктелмеген немесе басқа нұсқадан алынған. Үш файлды бірге жаңартыңыз.")
+    target = Path(tempfile.gettempdir()) / ("bookrec-runtime-" + fingerprint[:20])
+    marker = target / ".complete"
+    if not marker.is_file():
+        target.mkdir(parents=True, exist_ok=True)
+        with zipfile.ZipFile(bundle) as archive:
+            for entry in archive.infolist():
+                destination = (target / entry.filename).resolve()
+                if not destination.is_relative_to(target.resolve()):raise ValueError("Архив құрылымы дұрыс емес")
+            archive.extractall(target)
+        marker.write_text(fingerprint)
+    return target
+
+try:
+    ROOT = unpack_project()
+except (FileNotFoundError, ValueError, zipfile.BadZipFile) as error:
+    st.error(str(error));st.stop()
+
+sys.path.insert(0, str(ROOT))
+data_key = hashlib.sha256(str(UPLOAD_DIR).encode()).hexdigest()[:16]
+os.environ.setdefault("BOOKREC_DB_PATH", str(Path(tempfile.gettempdir()) / "bookrec-data" / data_key / "bookrec.db"))
 from backend import database as db
 from backend.service import BookRecService
 
-ROOT = Path(__file__).resolve().parent
-st.set_page_config(page_title="BookRec — Қазақ әдебиеті", page_icon="📚", layout="wide", initial_sidebar_state="collapsed")
 st.markdown("""<style>
 html,body,.stApp{background:#fcf3e8}
 [data-testid="stHeader"],footer,#MainMenu,[data-testid="stToolbar"]{display:none!important}
