@@ -1,6 +1,6 @@
-# BookRec — жаңа дизайндағы бөлек Streamlit қосымшасы
+# BookRec
 
-Бұл — Codex жасаған BookRec сайтының бастапқы HTML/CSS/JavaScript дизайнын сақтайтын **жаңа, дербес** қосымша. `Arai747/kazakh-books-recommender` жобасына немесе оның Streamlit сайтына қосылмайды. Өз репозиторийі, Streamlit қосымшасы және деректер базасы бар.
+
 
 - Басты бет, іздеу, жанр сүзгісі және 270 иллюстрациялық мұқаба — бастапқы дизайнмен бірдей.
 - Python + Streamlit интерфейсті custom component ретінде көрсетеді.
@@ -18,7 +18,7 @@ python -m pip install -r requirements.txt
 streamlit run app.py
 ```
 
-Python 3.12 ұсынылады.
+
 
 ## Жаңа streamlit.app доменінде жариялау
 
