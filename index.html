@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f8eee1"><meta name="description" content="Қазақ әдебиетінің бай мұрасын зерттеңіз. 270 кітап, сүйікті шығармалар және талғамыңызға сай жеке ұсыныстар.">
+<title>BookRec — Қазақ әдебиеті</title>
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<svg class="icon-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+<symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-8H9v8H4a1 1 0 0 1-1-1z"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M12 5v16m0-16C9 2 4 3 2 4v15c3-1 7-1 10 2 3-3 7-3 10-2V4c-2-1-7-2-10 1Z"/><path d="M6 7v8m12-8v8"/></symbol>
+<symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 2c0 7-3 10-10 10 7 0 10 3 10 10 0-7 3-10 10-10-7 0-10-3-10-10Z"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="7"/><path d="m16 16 5 5"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+</defs></svg>
+<header class="header"><div class="header-inner container">
+<a class="brand" href="#home" aria-label="BookRec басты бет"><span>Book<span class="brand-accent">Rec</span></span><small>ҚАЗАҚ ӘДЕБИЕТІ</small></a>
+<nav aria-label="Басты мәзір">
+<a href="#home" class="nav-link active" data-view="home"><svg><use href="#i-home"/></svg><span>Басты бет</span></a>
+<a href="#books" class="nav-link" data-view="books"><svg><use href="#i-book"/></svg><span>Кітаптар</span></a>
+<a href="#recommendations" class="nav-link" data-view="recommendations"><svg><use href="#i-spark"/></svg><span>Ұсыныстар</span></a>
+<a href="#favorites" class="nav-link" data-view="favorites"><svg><use href="#i-heart"/></svg><span>Таңдаулылар</span><span id="favorite-count" class="count" hidden>0</span></a>
+</nav></div></header>
+<main id="main">
+<section id="home-view" class="view">
+<div class="hero"><div class="hero-art" role="img" aria-label="Көне кітаптар мен қауырсын қалам"></div><div class="hero-glow"></div><div class="container hero-content">
+<div class="eyebrow hero-eyebrow"><span></span>ҚАЗАҚ ӘДЕБИЕТІНІҢ ӘЛЕМІНЕ ҚОШ КЕЛДІҢІЗ<span></span></div>
+<h1>Әр кітаптың өз әлемі бар.<br><em>Өзіңіздікін табыңыз.</em></h1>
+<p class="hero-description">Қазақ әдебиетінің бай мұрасын зерттеңіз.<br>Талғамыңызға сай келесі сүйікті кітабыңызды табыңыз.</p>
+<form class="search-form" id="hero-search" role="search"><svg><use href="#i-search"/></svg><input name="q" type="search" aria-label="Кітаптың атауын немесе авторын іздеу" placeholder="Кітаптың атауын немесе авторын іздеңіз…" autocomplete="off"><button type="submit" aria-label="Іздеу"><svg><use href="#i-arrow"/></svg></button></form>
+<div class="hero-note"><span class="tiny-star">✦</span> 270 шығарма <span class="dot">·</span> Біртұтас әдеби әлем</div>
+</div></div>
+<section class="collection container" aria-labelledby="featured-title"><div class="section-heading"><div><div class="eyebrow">БІЗДІҢ ЖИНАҚ<span></span></div><h2 id="featured-title">Оқуға тұрарлық шығармалар</h2><p>Қазақ әдебиетіндегі ерекше туындылармен танысыңыз.</p></div><a href="#books" class="outline-button">Барлық кітаптар <svg><use href="#i-arrow"/></svg></a></div>
+<div class="book-grid featured-grid" id="featured-books"></div></section>
+</section>
+<section id="books-view" class="view container inner-view" hidden><div class="page-intro"><div class="eyebrow">ӘДЕБИ МҰРА<span></span></div><h1>Кітаптар әлемі</h1><p>Өзіңізге жақын оқиғаны 270 шығарманың арасынан табыңыз.</p></div>
+<div class="catalog-toolbar"><form id="catalog-search" class="search-form" role="search"><svg><use href="#i-search"/></svg><input name="q" type="search" placeholder="Кітап немесе автор іздеу…" aria-label="Каталогтан іздеу"><button type="submit" aria-label="Іздеу"><svg><use href="#i-arrow"/></svg></button></form><label class="sort-label">Реті<select id="sort"><option value="catalog">Каталог ретімен</option><option value="title">Атауы бойынша</option><option value="author">Авторы бойынша</option><option value="short">Қысқа шығармалар</option></select></label></div>
+<div class="filter-list" id="genre-filters" aria-label="Жанр бойынша сүзгі"></div><div class="results-line"><span id="results-count" aria-live="polite"></span><button id="clear-filters" class="text-button" hidden>Сүзгілерді тазарту ×</button></div><div class="book-grid" id="catalog-books"></div><div id="catalog-empty" class="empty-state" hidden><svg><use href="#i-search"/></svg><h2>Кітап табылмады</h2><p>Басқа атаумен іздеп немесе сүзгілерді өзгертіп көріңіз.</p><button class="primary-button" id="reset-search">Барлық кітаптар</button></div><nav id="pagination" class="pagination" aria-label="Каталог беттері"></nav></section>
+<section id="favorites-view" class="view container inner-view" hidden><div class="page-intro"><div class="eyebrow">СІЗДІҢ КІТАП СӨРЕҢІЗ<span></span></div><h1>Таңдаулы шығармалар</h1><p>Жүрегіңізге жақын кітаптар — бір жерде.</p></div><div id="favorites-summary" class="favorites-summary" hidden><span id="favorites-total"></span><a class="outline-button" href="#recommendations">Маған не ұнайды? <svg><use href="#i-spark"/></svg></a></div><div class="book-grid" id="favorite-books"></div><div class="empty-state" id="favorites-empty"><svg><use href="#i-heart"/></svg><h2>Сіздің сөреңіз әлі бос</h2><p>Кітаптағы жүрек белгісін басып, ұнаған шығармаларыңызды сақтаңыз.<br>Осы таңдауларыңыз жаңа кітап табуға да көмектеседі.</p><a href="#books" class="primary-button">Кітаптарды қарау <svg><use href="#i-arrow"/></svg></a></div><p class="storage-note">My Reading List · Таңдауларыңыз бен оқу мәртебелері сақталады.</p></section>
+<section id="recommendations-view" class="view container inner-view" hidden><div class="page-intro"><div class="eyebrow">ӘДЕБИ ТАЛҒАМЫҢЫЗҒА САЙ<span></span></div><h1>Сізге арналған ұсыныстар</h1><p>Бір жақсы кітап — келесі жақсы кітапқа бастайтын жол.</p></div><div class="recommendation-banner"><span class="spark-circle"><svg><use href="#i-spark"/></svg></span><div><h3>Келесі сүйікті кітабыңызды табайық</h3><p id="recommendation-explanation">Ұнаған кемінде бір кітабыңызды таңдаңыз. Атауы, авторы мен жанры бойынша жақын шығармаларды ұсынамыз.</p></div><a href="#books" class="outline-button">Кітап таңдау <svg><use href="#i-arrow"/></svg></a></div><div id="recommendation-seeds"></div><div class="recommendation-heading"><h2 id="recommendation-title">Неден бастауға болады?</h2><span id="recommendation-count"></span></div><div class="book-grid" id="recommended-books"></div><p class="storage-note">Ұсыныстар каталог деректерінің ұқсастығына негізделеді.</p></section>
+<div id="load-error" class="container empty-state" hidden><h2>Каталог жүктелмеді</h2><p>Интернет байланысын тексеріп, бетті қайта жүктеңіз.</p><button onclick="location.reload()" class="primary-button">Қайта жүктеу</button></div>
+</main>
+<footer class="footer"><div class="container footer-inner"><div class="footer-line"></div><a href="#home" class="footer-brand">Book<span>Rec</span><small>ҚАЗАҚ ӘДЕБИЕТІН БІРГЕ ДӘРІПТЕЙІК</small></a><p>© 2026 BookRec. Барлық құқықтар қорғалған.</p></div></footer>
+<dialog id="book-dialog" aria-labelledby="dialog-title"><button class="dialog-close icon-button" aria-label="Жабу"><svg><use href="#i-close"/></svg></button><div id="dialog-content"></div></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="app.js" defer></script>
+</body></html>
